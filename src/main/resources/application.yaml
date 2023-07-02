@@ -1,0 +1,26 @@
+
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:postgresql://localhost:5432/config_service
+    username: {POSTGRESQL_USERNAME}
+    password: {POSTGRESQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %X{SERVICE} %msg
+    %replace(CONFIG_UUID=%X{CONFIG_UUID}){'CONFIG_UUID=$', ''} 
+    %replace(HOST_NAME=%X{HOST_NAME}){'HOST_NAME=$', ''} 
+    %replace(PORT_NUMBER=%X{PORT_NUMBER}){'PORT_NUMBER=$',''}%n"
